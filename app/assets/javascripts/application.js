@@ -26,6 +26,8 @@ $(document).ready(function(){
     return false;
   });
 
+  $(document).resize(function(){ activatePaneByIndex(global_index) })
+
   $("#p-form input").change( triggerSync ).keyup( triggerSync );
 
   $(window).keydown(function(e){
