@@ -144,6 +144,8 @@ function calculatePension(years, age, salary){
 
   }
 
+  if( value < 0 ) return 0;
+
   return Math.round(value);
 
 }
