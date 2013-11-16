@@ -2,6 +2,7 @@ GovathonPension::Application.routes.draw do
 
   root 'home#index'
 
+  get '/presentation'     =>  "home#presentation1"
   get '/presentation1'    =>  "home#presentation1"
   get '/presentation2'    =>  "home#presentation2"
   get '/presentation3'    =>  "home#presentation3"
