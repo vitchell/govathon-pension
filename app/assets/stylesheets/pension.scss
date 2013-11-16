@@ -173,6 +173,12 @@ h1 {
     position: relative;
     top: -10px;
   }
+  a {
+    color: inherit;
+  }
+  a:hover {
+    text-decoration: none;
+  }
   strong {
     display: inline;
     font-weight: 800;
@@ -204,9 +210,58 @@ h1 {
   }
 }
 
+h2 {
+  margin: 0 0 10px 0;
+  text-align: center;
+  font-size: 70px;
+  line-height: 90px;
+}
+h3 {
+  margin: 0 0 20px 0;
+  text-align: center;
+  font-size: 30px;
+  line-height: 40px;
+}
+
+ul.gp-bulleted-list {
+  display: block;
+  padding: 20px 0 0 30px;
+  list-style-type: disc;
+  font-size: 40px;
+  line-height: 50px;
+  @include box-sizing(border-box);
+  > li {
+    display: list-item;
+    float: left;
+    width: 100%;
+    margin: 0 0 10px 0;
+    @include box-sizing(border-box);
+    > ul {
+      display: block;
+      font-size: 30px;
+      line-height: 40px;
+      > li {
+        display: list-item;
+        float: left;
+        width: 100%;
+        @include box-sizing(border-box);
+      }
+    }
+  }
+}
+
 p {
   margin: 0 0 30px 0;
   text-indent: 3em;
+}
+
+p.gp-presentation-paragraph {
+  display: block;
+  padding: 20px 40px 0 40px;
+  font-size: 40px;
+  line-height: 50px;
+  text-indent: 0;
+  @include box-sizing(border-box);
 }
 
 .gp-form-row {

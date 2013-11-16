@@ -3,19 +3,34 @@ class HomeController < ApplicationController
   def index
   end
 
-  def test
+  def presentation1
   end
 
-  def test2
+  def presentation2
   end
 
-  def test3
+  def presentation3
   end
 
-  def test4
+  def presentation4
   end
   
-  def test5
+  def presentation5
+  end
+
+  def presentation6
+  end
+
+  def presentation7
+  end
+
+  def presentation8
+  end
+
+  def presentation9
+  end
+  
+  def presentation10
   end
 
 end
