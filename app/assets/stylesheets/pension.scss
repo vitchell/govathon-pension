@@ -672,6 +672,9 @@ nav {
       white-space: normal;
       margin: 0 -4px 0 0;
       padding: 10px 0 0 0;
+      @include screen-format(mobile) {
+        margin: 0 -3px 0 0;
+      }
     }
   }
 }
