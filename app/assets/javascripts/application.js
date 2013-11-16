@@ -13,3 +13,18 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+
+function activatePaneByIndex( index ){
+  var window_size = $(window).width();
+  $("#p-slider").animate({left: "-"+(index * window_size)+"px" }, 400, "linear");
+}
+
+$(document).ready(function(){
+  $("#p-slider a").click(function(e){
+    var index = parseInt( $(this).attr("href").replace("#", "") );
+    activatePaneByIndex( index );
+    e.preventDefault();
+    return false;
+  });
+});

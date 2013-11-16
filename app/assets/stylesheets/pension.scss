@@ -1,0 +1,28 @@
+@import "compass/reset";
+@import "compass/css3";
+@import "compass/utilities/general/clearfix";
+@import "compass/utilities/general/hacks";
+@import "susy";
+
+#p-form{
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  white-space: nowrap;
+
+  ul#p-slider {
+    display: block;
+    float: left;
+    width: 100%;
+    overflow: visible;
+    white-space: nowrap;
+    position: relative;
+    > li {
+      white-space: normal;
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
