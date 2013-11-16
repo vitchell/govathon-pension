@@ -25,33 +25,7 @@ $(document).ready(function(){
     return false;
   });
 
-  $("#p-form input").change( function(){
-
-    var id = $(this).attr("id");
-    if( id.match("sync") != null ){
-      var target_id = id.replace("-sync", "");
-      
-      if( target_id == "years" || target_id == "age" || target_id == "salary" ){
-        $("#"+target_id).val( $(this).val() );
-      }else{
-        var checked = $(this).is(":checked");
-        $("#"+target_id).prop("checked", checked);
-        console.log(checked)
-      }
-
-    }else{
-      var target_id = id + "-sync";
-      
-      if( id == "years" || id == "age" || id == "salary" ){
-        $("#"+target_id).val( $(this).val() );
-      }else{
-        var checked = $(this).is(":checked");
-        $("#"+target_id).attr("checked", checked);
-      }
-    }
-
-    updateTable(); 
-  });
+  $("#p-form input").change( triggerSync ).keyup( triggerSync );
 
   $(window).keydown(function(e){
     if( e.which == 39 ){
@@ -62,6 +36,35 @@ $(document).ready(function(){
   });
 
 });
+
+function triggerSync(){
+
+  var id = $(this).attr("id");
+  if( id.match("sync") != null ){
+    var target_id = id.replace("-sync", "");
+    
+    if( target_id == "years" || target_id == "age" || target_id == "salary" ){
+      $("#"+target_id).val( $(this).val() );
+    }else{
+      var checked = $(this).is(":checked");
+      $("#"+target_id).prop("checked", checked);
+      console.log(checked)
+    }
+
+  }else{
+    var target_id = id + "-sync";
+    
+    if( id == "years" || id == "age" || id == "salary" ){
+      $("#"+target_id).val( $(this).val() );
+    }else{
+      var checked = $(this).is(":checked");
+      $("#"+target_id).attr("checked", checked);
+    }
+  }
+
+  updateTable(); 
+
+}
 
 function updateTable(){
   var years   = parseInt( $("#years").val() );
