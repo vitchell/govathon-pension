@@ -26,7 +26,10 @@ $(document).ready(function(){
     return false;
   });
 
-  $(document).resize(function(){ activatePaneByIndex(global_index) })
+  $(window).resize(function(){ 
+    console.log("resize", global_index); 
+    activatePaneByIndex(global_index) 
+  });
 
   $("#p-form input").change( triggerSync ).keyup( triggerSync );
 
