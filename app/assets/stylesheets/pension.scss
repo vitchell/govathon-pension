@@ -149,7 +149,8 @@ body {
   font-family: $serif-font;
   line-height: 30px;
   color: $font-body-color;
-  background: $beige;
+  background: $beige image-url("body-background.jpg") repeat 0 0;
+  text-align: center;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -171,6 +172,7 @@ h1 {
 
 p {
   margin: 0 0 30px 0;
+  text-indent: 3em;
 }
 
 .gp-form-row {
@@ -184,7 +186,10 @@ label {
   font-size: 18px;
   line-height: 30px;
 }
-label.gp-label-large {}
+label.gp-label-large {
+  font-size: 22px;
+  margin: 0 0 20px 0;
+}
 
 input,
 textarea,
@@ -347,9 +352,11 @@ nav {
 }
 
 #gp-content-container {
-  display: block;
+  display: inline-block;
   width: 100%;
-  padding: 0 12px;
+  max-width: 1024px;
+  padding: 0 12px 20px;
+  text-align: left;
   @include box-sizing(border-box);
 }
 
@@ -357,7 +364,7 @@ nav {
   display: block;
   float: left;
   width: 100%;
-  padding: 54px 40px 0 40px;
+  padding: 54px 40px 20px 40px;
   border-top: 3px solid $white;
   background: $off-white;
   @include box-sizing(border-box);
