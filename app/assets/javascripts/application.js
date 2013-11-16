@@ -71,11 +71,16 @@ function updateTable(){
 
   if( isNaN(years) || isNaN(age) || isNaN(salary) ) return;
 
-  $("#results tbody").empty();
+  $("#gp-results-table-1 tbody, #gp-results-table-2 tbody").empty();
 
-  for( var i = -6; i <= 6; i++ ){
-    $("#results tbody").append(
-      "<tr><td>"+ (current_year + i) +"&nbsp;</td><td>$"+calculatePension(years + i, age + i, salary)+"</td></tr>"
+  for( var i = -7; i <= 7; i++ ){
+    $("#gp-results-table-1 tbody").append(
+      "<tr><td>"+ (current_year + i) +"&nbsp;</td><td>$"+calculatePension(years + i, age + i, salary)+" <span>/mo</span></td></tr>"
+    );
+  }
+  for( var i = 8; i <= 22; i++ ){
+    $("#gp-results-table-2 tbody").append(
+      "<tr><td>"+ (current_year + i) +"&nbsp;</td><td>$"+calculatePension(years + i, age + i, salary)+" <span>/mo</span></td></tr>"
     );
   }
 
@@ -85,7 +90,7 @@ function updateTable(){
 function calculatePension(years, age, salary){
   var value = 0;
   var flag_fire   = $("#fire").is(":checked");
-  var flag_1978   = $("#a1978").is(":checked");
+  var flag_1978   = true;
   var flag_2005   = $("#a2005").is(":checked");
   var max_age     = ( flag_fire ? 55 : 60 );
   var multiplier  = ( flag_fire ? 0.03 : ( flag_2005 ? 0.025 : 0.02 ) );
@@ -132,7 +137,6 @@ function calculatePension(years, age, salary){
 
   return Math.round(value);
 
-
 }
 
 
@@ -142,6 +146,7 @@ function activatePaneByIndex( index ){
   $("#p-slider").animate({left: "-"+(index * motion_size)+"px" }, 400, "linear");
   global_index = index;
   $("nav>ul>li").removeClass("gp-step-current").eq(index).addClass("gp-step-current");
+  if( index == 4 )$("nav>ul>li").addClass("gp-step-current");
 }
 
 
