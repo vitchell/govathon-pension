@@ -312,9 +312,23 @@ button {
   @include text-shadow(0 1px 1px $teal-dark);
   @include screen-format(mobile) {
     font-size: 16px;
+    width: 100%;
   }
   strong {
     text-decoration: underline;
+  }
+  i {
+    margin: 0 0 0 10px;
+    line-height: 1em;
+    position: relative;
+    top: 4px;
+    @include screen-format(mobile) {
+      float: right;
+      margin: 0 0 0 10px;
+      line-height: 1em;
+      position: relative;
+      top: 8px;
+    }
   }
 }
 
@@ -332,6 +346,7 @@ button.gp-button-large {
   padding: 17px 20px 15px 20px;
   font-size: 22px;
   @include screen-format(mobile) {
+    width: 100%;
     padding: 12px 20px 10px 20px;
     font-size: 16px;
   }
