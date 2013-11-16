@@ -25,6 +25,8 @@ $(document).ready(function(){
     return false;
   });
 
+  $("#p-form input").change(updateTable);
+
   $(window).keydown(function(e){
     if( e.which == 39 ){
       activatePaneByIndex( global_index + 1 );
@@ -41,6 +43,10 @@ function updateTable(){
   var salary  = parseInt( $("#salary").val().replace("$", "").replace(",", "") );
   var current_year = new Date().getFullYear();
 
+  if( isNaN(years) || isNaN(age) || isNaN(salary) ) return;
+
+  $("#results tbody").empty();
+
   for( var i = -6; i <= 6; i++ ){
     $("#results tbody").append(
       "<tr><td>"+ (current_year + i) +"&nbsp;</td><td>$"+calculatePension(years + i, age + i, salary)+"</td></tr>"
@@ -52,9 +58,9 @@ function updateTable(){
 
 function calculatePension(years, age, salary){
   var value = 0;
-  var flag_fire   = false;
-  var flag_1978   = true;
-  var flag_2005   = false;
+  var flag_fire   = $("#fire").is(":checked");
+  var flag_1978   = $("#a1978").is(":checked");
+  var flag_2005   = $("#a2005").is(":checked");
   var max_age     = ( flag_fire ? 55 : 60 );
   var multiplier  = ( flag_fire ? 0.03 : ( flag_2005 ? 0.025 : 0.02 ) );
 
