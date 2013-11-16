@@ -366,7 +366,7 @@ nav {
   display: block;
   float: left;
   width: 100%;
-  padding: 54px 40px 20px 40px;
+  padding: 44px 40px 20px 40px;
   border-top: 3px solid $white;
   background: $off-white;
   @include box-sizing(border-box);
@@ -414,7 +414,7 @@ nav {
       }
       input[type="checkbox"] {
         position: absolute;
-        margin-top: 5px;
+        margin-top: 6px;
         margin-bottom: 0;
       }
     }
@@ -520,6 +520,7 @@ nav {
       height: 100%;
       white-space: normal;
       margin: 0 -4px 0 0;
+      padding: 10px 0 0 0;
     }
   }
 }
