@@ -21,12 +21,18 @@
     <!-- #gp-header-step -->
 
     <section id="gp-column-left">
-      <div class="gp-form-row">
-        <label class="gp-label-large">Input your <strong>total years of service</strong>:</label>
-        <input class="gp-input-large" type="text" placeholder="27" />
+      <label class="gp-label" style="cursor: default;">Click Any That Apply:</label>
+      <div class="gp-form-row" style="margin-top: 24px;">
+        <div class="gp-checkbox-row">
+          <input id="gp-checkbox-1" type="checkbox" /><label for="gp-checkbox-1">I’m a firefighter or police officer.</label>
+          <input id="gp-checkbox-2" type="checkbox" /><label for="gp-checkbox-2">I was a member of a city pension fund on March 31st, 1978.</label>
+          <input id="gp-checkbox-3" type="checkbox" /><label for="gp-checkbox-3">I was a part of the 2005 amendment plan.</label>
+        </div>
+        <!-- .gp-checkbox-row -->
       </div>
       <!-- .gp-form-row -->
-      <a class="gp-button gp-button-large" href="/test2">Go forward to <strong>next step</strong>.</a>
+      <a class="gp-button gp-button-large" href="/test5">Go forward to <strong>next step</strong>.</a>
+      <a class="gp-button gp-button-negative" href="/test3">Go back to <strong>previous step</strong>.</a>
     </section>
     <!-- #gp-column-left -->
 
@@ -41,3 +47,4 @@
 
 </div>
 <!-- #gp-content-container -->
+

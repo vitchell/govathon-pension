@@ -185,6 +185,7 @@ label {
   font-family: $serif-font;
   font-size: 18px;
   line-height: 30px;
+  cursor: pointer;
 }
 label.gp-label-large {
   font-size: 22px;
@@ -259,6 +260,7 @@ button {
   font-family: $serif-font;
   line-height: 30px;
   cursor: pointer;
+  position: relative;
   -webkit-font-smoothing: antialiased;
   -webkit-appearance: none;
   @include box-sizing(border-box);
@@ -304,7 +306,7 @@ button:focus {
   outline: none;
 }
 
-/*.gp-button:before,
+.gp-button:before,
 input[type="submit"]:before,
 button:before {
   position: absolute;
@@ -313,7 +315,7 @@ button:before {
   bottom: 0;
   left: 0;
   content: '';
-}*/
+}
 
 
 
@@ -394,6 +396,35 @@ nav {
 
   section#gp-column-left {
     @include span-columns(6, 12);
+    .gp-form-row,
+    .gp-checkbox-row {
+      @include suffix(1);
+      @include span-columns(5, 6);
+    }
+    .gp-checkbox-row {
+      margin-top: 5px;
+      margin-bottom: 33px;
+      @include span-columns(6, 6);
+      label {
+        padding: 0 0 0 25px;
+        margin-bottom: 10px;
+        font-size: 16px;
+        line-height: 25px;
+        @include box-sizing(border-box);
+      }
+      input[type="checkbox"] {
+        position: absolute;
+        margin-top: 5px;
+        margin-bottom: 0;
+      }
+    }
+    .gp-form-row.gp-form-row-small {
+      @include suffix(0);
+      @include span-columns(3, 6);
+    }
+    .gp-form-row.gp-form-row-small+.gp-form-row.gp-form-row-small {
+      @include span-columns(3 omega, 6);
+    }
     label {
       width: 100%;
     }
@@ -406,6 +437,36 @@ nav {
 
   section#gp-column-right {
     @include span-columns(6 omega, 12);
+    table {
+      float: left;
+      width: 50%;
+      colgroup {
+        width: 100%;
+        col {
+          width: 20%;
+        }
+        col+col {
+          width: 80%;
+        }
+      }
+      tbody {
+        width: 100%;
+        tr {
+          width: 100%;
+          td {
+            padding: 1px 5px 0 5px;
+            span {
+              font-size: 12px;
+            }
+          }
+        }
+        tr:nth-child(odd) {
+          td {
+            background: #ebebe8;
+          }
+        }
+      }
+    }
   }
 
 }
