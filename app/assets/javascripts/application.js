@@ -99,7 +99,7 @@ function calculatePension(years, age, salary){
   if( years >= 5  && age >= 60 ) type = "vested";
   if( years >= 10 ) type = "early";
   if( flag_1978 && years >= 25 && ( (flag_fire && age >= 50) || ( !flag_fire && age >= 55) ) ) type = "reduced";
-  if( (flag_fire && age >= 55 && years >= 10 ) || (flag_1978 && age >= 60 && years >= 10) ) type = "normal";
+  if( (flag_2005 && years >= 30) || (flag_fire && age >= 55 && years >= 10 ) || (flag_1978 && age >= 60 && years >= 10) ) type = "normal";
 
   if( type == "normal" ){
 
