@@ -60,8 +60,10 @@ $font-header-color:   #575548;
 $font-body-color:     #575548;
 
 $brown:               #575548;
+$brown-light:         #dbdbd6;
 
-$white:               #fcfcfa;
+$white:               #ffffff;
+$black:               #000000;
 $off-white:           #fcfcfa;
 $beige:               #efedde;
 
@@ -141,6 +143,7 @@ html {
 /************************************************/
 
 body {
+  width: 100%;
   height: 100%;
   font-size: 16px;
   font-family: $serif-font;
@@ -151,24 +154,46 @@ body {
 }
 
 h1 {
+  margin: 0 0 23px 0;
   font-family: $sans-serif-font;
+  font-weight: 800;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 48px;
+  span {
+    font-family: $serif-font;
+    font-weight: 400;
+    font-style: italic;
+    text-transform: none;
+    font-size: 36px;
+  }
 }
 
-p {}
+p {
+  margin: 0 0 30px 0;
+}
+
+.gp-form-row {
+  display: inline-block;
+  width: 100%;
+}
 
 label {
   display: inline-block;
+  font-family: $serif-font;
+  font-size: 18px;
+  line-height: 30px;
 }
-label.gp-label-small {}
 label.gp-label-large {}
 
 input,
 textarea,
 select {
   display: inline-block;
-  font-family: $sans-serif-font;
-  font-size: 20px;
-  line-height: 30px;
+  margin: 0 0 19px 0;
+  font-family: $serif-font;
+  font-size: 30px;
+  line-height: 40px;
 }
 
 input:focus,
@@ -179,10 +204,21 @@ input[type="text"],
 input[type="email"],
 input[type="password"],
 textarea {
-  padding: 8px 14px 10px 14px;
-  border: 1px solid $brown;
+  padding: 3px 10px 5px 10px;
+  border: 1px solid $brown-light;
   color: $font-body-color;
   @include box-sizing(border-box);
+}
+
+input[type="text"].gp-input-large,
+input[type="email"].gp-input-large,
+input[type="password"].gp-input-large,
+textarea.gp-input-large {
+  padding: 10px 14px 8px 14px;
+  margin: 0 0 51px 0;
+  font-size: 60px;
+  line-height: 80px;
+  font-weight: 700;
 }
 
 a {
@@ -205,24 +241,42 @@ em { font-style: italic; }
 input[type="submit"],
 button {
   display: inline-block;
-  padding: 9px 20px;
-  margin: 0;
+  padding: 9px 20px 7px 20px;
+  margin: 0 10px 15px 0;
   border-top: none;
   border-right: none;
   border-bottom: 3px solid $teal-dark;
   border-left: none;
   color: $white;
   background: $teal;
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 18px;
+  font-weight: 400;
   font-family: $serif-font;
   line-height: 30px;
-  text-transform: uppercase;
   cursor: pointer;
   -webkit-font-smoothing: antialiased;
   -webkit-appearance: none;
   @include box-sizing(border-box);
   @include border-radius(2px);
+  @include text-shadow(0 1px 1px $teal-dark);
+  strong {
+    text-decoration: underline;
+  }
+}
+
+.gp-button.gp-button-negative,
+input[type="submit"].gp-button-negative,
+button.gp-button-negative {
+  @include text-shadow(0 1px 1px $red-dark);
+  background: $red;
+  border-bottom: 3px solid $red-dark;
+}
+
+.gp-button.gp-button-large,
+input[type="submit"].gp-button-large,
+button.gp-button-large {
+  padding: 17px 20px 15px 20px;
+  font-size: 22px;
 }
 
 .gp-button:active,
@@ -245,7 +299,7 @@ button:focus {
   outline: none;
 }
 
-.gp-button:before,
+/*.gp-button:before,
 input[type="submit"]:before,
 button:before {
   position: absolute;
@@ -254,18 +308,100 @@ button:before {
   bottom: 0;
   left: 0;
   content: '';
+}*/
+
+
+
+
+
+
+
+
+nav {
+  display: block;
+  width: 100%;
+  border-top: 7px solid $brown;
+  ul {
+    display: block;
+    width: 100%;
+    padding: 29px 0 26px 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.5);
+    text-align: center;
+    li {
+      display: inline-block;
+      width: 58px;
+      height: 58px;
+      margin: 0 20px;
+      background: transparent image-url("steps-sprite.png") no-repeat 0 0;
+      @include opacity(0.5);
+    }
+    li:nth-child(2) { background-position: -58px 0; }
+    li:nth-child(3) { background-position: -116px 0; }
+    li:nth-child(4) { background-position: -174px 0; }
+    li:hover,
+    li.gp-step-current {
+      cursor: pointer;
+      @include opacity(1);
+    }
+  }
 }
 
+#gp-content-container {
+  display: block;
+  width: 100%;
+  padding: 0 12px;
+  @include box-sizing(border-box);
+}
 
+#gp-content {
+  display: block;
+  float: left;
+  width: 100%;
+  padding: 54px 40px 0 40px;
+  border-top: 3px solid $white;
+  background: $off-white;
+  @include box-sizing(border-box);
+  @include box-shadow (0 1px 0 rgba(87, 85, 72, 0.03) inset, 0 0 3px rgba(0, 0, 0, 0.2));
 
+  #gp-header-step {
+    display: block;
+    float: left;
+    width: 100%;
+    height: 1px;
+    margin: 0 0 50px 0;
+    border-top: 1px solid $brown-light;
+    border-bottom: 1px solid $brown-light;
+    text-align: center;
 
+    span {
+      display: inline-block;
+      padding: 0 10px;
+      background: $off-white;
+      font-family: $sans-serif-font;
+      font-weight: 800;
+      text-transform: uppercase;
+      position: relative;
+      top: -15px;
+    }
+  }
 
+  section#gp-column-left {
+    @include span-columns(6, 12);
+    label {
+      width: 100%;
+    }
+    input[type="text"] {
+      width: 100%;
+      position: relative;
+      top: -1px;
+    }
+  }
 
+  section#gp-column-right {
+    @include span-columns(6 omega, 12);
+  }
 
-
-
-
-
+}
 
 
 
