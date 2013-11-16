@@ -25,7 +25,33 @@ $(document).ready(function(){
     return false;
   });
 
-  $("#p-form input").change(updateTable);
+  $("#p-form input").change( function(){
+
+    var id = $(this).attr("id");
+    if( id.match("sync") != null ){
+      var target_id = id.replace("-sync", "");
+      
+      if( target_id == "years" || target_id == "age" || target_id == "salary" ){
+        $("#"+target_id).val( $(this).val() );
+      }else{
+        var checked = $(this).is(":checked");
+        $("#"+target_id).prop("checked", checked);
+        console.log(checked)
+      }
+
+    }else{
+      var target_id = id + "-sync";
+      
+      if( id == "years" || id == "age" || id == "salary" ){
+        $("#"+target_id).val( $(this).val() );
+      }else{
+        var checked = $(this).is(":checked");
+        $("#"+target_id).attr("checked", checked);
+      }
+    }
+
+    updateTable(); 
+  });
 
   $(window).keydown(function(e){
     if( e.which == 39 ){
@@ -110,9 +136,14 @@ function calculatePension(years, age, salary){
 }
 
 
-
 function activatePaneByIndex( index ){
-  var window_size = $(window).width();
-  $("#p-slider").animate({left: "-"+(index * window_size)+"px" }, 400, "linear");
+  if( index < 0 || index > 4 ) return; // TODO: make this modular and not hardcoded
+  var motion_size = $("#p-form").eq(0).outerWidth(true);
+  $("#p-slider").animate({left: "-"+(index * motion_size)+"px" }, 400, "linear");
   global_index = index;
+  $("nav>ul>li").removeClass("gp-step-current").eq(index).addClass("gp-step-current");
 }
+
+
+
+
