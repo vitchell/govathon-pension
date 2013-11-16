@@ -4,6 +4,296 @@
 @import "compass/utilities/general/hacks";
 @import "susy";
 
+@import "compass/reset";
+@import "compass/css3";
+@import "compass/utilities/general/clearfix";
+@import "compass/utilities/general/hacks";
+@import "susy";
+
+
+
+/****************************************************************************************************
+
+  Table of Contents
+
+*****************************************************************************************************
+
+  0.  SCSS Variables
+      - Color Theme
+      - Media Size Breakpoints
+      - Susy Grid Settings
+      - Font Stacks
+      - Z Indices
+
+  1.  Universal Cascade
+      - Body
+
+  2.  Tag-Specific Styles
+      - Forms
+      - Tables
+
+  3.  Utility Classes
+      - Paragraph Variations
+      - Buttons
+
+  4.  Template Sections
+
+  5.  Content Elements
+
+  6.  Pages
+
+  7.  JS Widgets
+
+****************************************************************************************************/
+
+
+
+/****************************************************************************************************
+  0.  SCSS Variables
+****************************************************************************************************/
+
+
+/* Color Theme */
+/************************************************/
+
+$font-header-color:   #575548;
+$font-body-color:     #575548;
+
+$brown:               #575548;
+
+$white:               #fcfcfa;
+$off-white:           #fcfcfa;
+$beige:               #efedde;
+
+$teal:                #6bd7c7;
+$teal-dark:           #40a795;
+
+$red:                 #f86f6b;
+$red-dark:            #db423f;
+
+$orange:              #f1a953;
+$blue:                #516a9e;
+$magenta:             #dd407b;
+
+
+/* Media Size Breakpoints */
+/************************************************/
+
+$monitor-breakpoint:  1200px;
+$laptop-breakpoint:   980px;
+$tablet-breakpoint:   768px;
+$phone-breakpoint:    480px;
+
+@mixin screen-format($media-type) {
+  @if $media-type == monitor {
+    @media (min-width: $monitor-breakpoint) { @content; }
+  }
+  @else if $media-type == laptop {
+    @media (min-width: $laptop-breakpoint) and (max-width: $monitor-breakpoint - 1) { @content; }
+  }
+  @else if $media-type == tablet {
+    @media (min-width: $tablet-breakpoint) and (max-width: $laptop-breakpoint - 1) { @content; }
+  }
+  @else if $media-type == phone {
+    @media (min-width: $phone-breakpoint) and (max-width: $tablet-breakpoint - 1) { @content; }
+  }
+  @else if $media-type == nano {
+    @media (max-width: $phone-breakpoint - 1) { @content; }
+  }
+}
+
+/* Susy Grid Settings */
+/************************************************/
+
+$total-columns:   12;
+$column-width:    40px;
+$gutter-width:    40px;
+$grid-padding:    0;
+
+
+/* Font Stacks */
+/************************************************/
+
+$serif-font: 'Gentium Book Basic', 'Georgia', 'Times New Roman', serif;
+$sans-serif-font: 'Open Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+
+$symbolset-standard: "SSStandard";
+$symbolset-symbolicons: "SSSymbolicons";
+$symbolset-social: "SSSocial";
+
+
+
+
+/****************************************************************************************************
+  1.  Universal Cascade
+****************************************************************************************************/
+
+
+/* HTML */
+/************************************************/
+
+html {
+  height: 100%;
+}
+
+
+/* Body */
+/************************************************/
+
+body {
+  height: 100%;
+  font-size: 16px;
+  font-family: $serif-font;
+  line-height: 30px;
+  color: $font-body-color;
+  background: $beige;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 {
+  font-family: $sans-serif-font;
+}
+
+p {}
+
+label {
+  display: inline-block;
+}
+label.gp-label-small {}
+label.gp-label-large {}
+
+input,
+textarea,
+select {
+  display: inline-block;
+  font-family: $sans-serif-font;
+  font-size: 20px;
+  line-height: 30px;
+}
+
+input:focus,
+textarea:focus,
+select:focus { outline: none; }
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+  padding: 8px 14px 10px 14px;
+  border: 1px solid $brown;
+  color: $font-body-color;
+  @include box-sizing(border-box);
+}
+
+a {
+  color: $orange;
+  cursor: pointer;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+strong { font-weight: 700; }
+em { font-style: italic; }
+
+
+/* Buttons */
+/************************************************/
+
+.gp-button,
+input[type="submit"],
+button {
+  display: inline-block;
+  padding: 9px 20px;
+  margin: 0;
+  border-top: none;
+  border-right: none;
+  border-bottom: 3px solid $teal-dark;
+  border-left: none;
+  color: $white;
+  background: $teal;
+  font-size: 20px;
+  font-weight: 700;
+  font-family: $serif-font;
+  line-height: 30px;
+  text-transform: uppercase;
+  cursor: pointer;
+  -webkit-font-smoothing: antialiased;
+  -webkit-appearance: none;
+  @include box-sizing(border-box);
+  @include border-radius(2px);
+}
+
+.gp-button:active,
+input[type="submit"]:active,
+button:active {
+  position: relative;
+  top: 2px;
+}
+
+.gp-button:hover,
+input[type="submit"]:hover,
+button:hover {
+  text-decoration: none;
+  @include opacity(.66);
+}
+
+.gp-button:focus,
+input[type="submit"]:focus,
+button:focus {
+  outline: none;
+}
+
+.gp-button:before,
+input[type="submit"]:before,
+button:before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  content: '';
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #p-form{
   height: 100%;
   width: 100%;
@@ -26,18 +316,6 @@
     }
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
