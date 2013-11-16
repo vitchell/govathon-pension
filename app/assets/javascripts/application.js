@@ -35,8 +35,22 @@ $(document).ready(function(){
 
 });
 
+function updateTable(){
+  var years   = parseInt( $("#years").val() );
+  var age     = parseInt( $("#age").val() );
+  var salary  = parseInt( $("#salary").val().replace("$", "").replace(",", "") );
+  var current_year = new Date().getFullYear();
 
-function createRow(years, age, salary){
+  for( var i = -6; i <= 6; i++ ){
+    $("#results tbody").append(
+      "<tr><td>"+ (current_year + i) +"&nbsp;</td><td>$"+calculatePension(years + i, age + i, salary)+"</td></tr>"
+    );
+  }
+
+}
+
+
+function calculatePension(years, age, salary){
   var value = 0;
   var flag_fire   = false;
   var flag_1978   = true;
@@ -84,7 +98,7 @@ function createRow(years, age, salary){
 
   }
 
-  return value;
+  return Math.round(value);
 
 
 }
