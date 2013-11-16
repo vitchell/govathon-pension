@@ -2,7 +2,8 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.0.0'
 
-gem 'sqlite3'
+gem "pg", :group => :production
+gem "sqlite3", :group => [:production, :test]
 
 gem 'sass-rails', '~> 4.0.0'
 gem "compass-rails", "~> 2.0.alpha.0"
