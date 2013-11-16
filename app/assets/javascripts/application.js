@@ -28,6 +28,7 @@ $(document).ready(function(){
   $("#p-form input").change( triggerSync ).keyup( triggerSync );
 
   $(window).keydown(function(e){
+    if( $( document.activeElement ).is("input[type=text]") ) return;
     if( e.which == 39 ){
       activatePaneByIndex( global_index + 1 );
     }else if( e.which == 37 ){
@@ -72,9 +73,10 @@ function updateTable(){
   var salary  = parseInt( $("#salary").val().replace("$", "").replace(",", "") );
   var current_year = new Date().getFullYear();
 
-  if( isNaN(years) || isNaN(age) || isNaN(salary) ) return;
-
   $("#gp-results-table-1 tbody, #gp-results-table-2 tbody").empty();
+
+  if( isNaN(years) || isNaN(age) || isNaN(salary) || years == 0 || age == 0 || salary == 0 ) return;
+
 
   for( var i = -7; i <= 7; i++ ){
     $("#gp-results-table-1 tbody").append(
