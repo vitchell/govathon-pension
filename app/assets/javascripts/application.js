@@ -54,7 +54,6 @@ function triggerSync(){
     }else{
       var checked = $(this).is(":checked");
       $("#"+target_id).prop("checked", checked);
-      console.log(checked)
     }
 
   }else{
