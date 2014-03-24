@@ -75,7 +75,11 @@ function updateTable(){
   var years   = parseInt( $("#years").val() );
   var age     = parseInt( $("#age").val() );
   var salary  = parseInt( $("#salary").val().replace("$", "").replace(",", "") );
+  var vacation= parseInt( $("#vacation").val() );
   var current_year = new Date().getFullYear();
+
+  // Add on one pay period worth of vacation accrual into monthly salary
+  salary += ( ( (salary * 12) / 52 ) * vacation ) / 12;  
 
   $("#gp-results-table-1 tbody, #gp-results-table-2 tbody").empty();
 
@@ -101,14 +105,22 @@ function calculatePension(years, age, salary){
   var flag_fire   = $("#fire").is(":checked");
   var flag_1978   = true;
   var flag_2005   = $("#a2005").is(":checked");
+  var flag_2011   = $("#a2011").is(":checked");
   var max_age     = ( flag_fire ? 55 : 60 );
   var multiplier  = ( flag_fire ? 0.03 : ( flag_2005 ? 0.025 : 0.02 ) );
+  if( flag_2011 ) multiplier = 0.01;
 
   var type = "none";
   if( years >= 5  && age >= 60 ) type = "vested";
   if( years >= 10 ) type = "early";
   if( flag_1978 && years >= 25 && ( (flag_fire && age >= 50) || ( !flag_fire && age >= 55) ) ) type = "reduced";
-  if( (flag_2005 && years >= 30) || (flag_fire && age >= 55 && years >= 10 ) || (flag_1978 && age >= 60 && years >= 10) ) type = "normal";
+  if(  (flag_2005 && years >= 30) 
+    || (flag_2005 && flag_fire && age >= 55 && years >= 10 ) 
+    || (flag_1978 && age >= 60 && years >= 10) 
+    || (flag_2011 && age >= 62 && years >= 15) ){ 
+
+    type = "normal";
+  }
 
   if( type == "normal" ){
 
@@ -152,12 +164,12 @@ function calculatePension(years, age, salary){
 
 
 function activatePaneByIndex( index ){
-  if( index < 0 || index > 4 ) return; // TODO: make this modular and not hardcoded
+  if( index < 0 || index > 5 ) return; // TODO: make this modular and not hardcoded
   var motion_size = $("#p-form").eq(0).outerWidth(true);
   $("#p-slider").animate({left: "-"+(index * motion_size)+"px" }, 400, "linear");
   global_index = index;
   $("nav>ul>li").removeClass("gp-step-current").eq(index).addClass("gp-step-current");
-  if( index == 4 )$("nav>ul>li").addClass("gp-step-current");
+  if( index == 5 )$("nav>ul>li").addClass("gp-step-current");
 }
 
 
