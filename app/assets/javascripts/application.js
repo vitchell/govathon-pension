@@ -48,8 +48,7 @@ function triggerSync(){
   var id = $(this).attr("id");
   if( id.match("sync") != null ){
     var target_id = id.replace("-sync", "");
-    
-    if( target_id == "years" || target_id == "age" || target_id == "salary" ){
+    if( target_id == "years" || target_id == "age" || target_id == "salary" || target_id == "vacation"  ){
       $("#"+target_id).val( $(this).val() );
     }else{
       var checked = $(this).is(":checked");
@@ -58,8 +57,7 @@ function triggerSync(){
 
   }else{
     var target_id = id + "-sync";
-    
-    if( id == "years" || id == "age" || id == "salary" ){
+    if( id == "years" || id == "age" || id == "salary" || id == "vacation" ){
       $("#"+target_id).val( $(this).val() );
     }else{
       var checked = $(this).is(":checked");
