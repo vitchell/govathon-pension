@@ -6,7 +6,7 @@ gem "pg", :group => :production
 gem "sqlite3", :group => [:development, :test]
 
 gem 'sass-rails', '~> 4.0.0'
-gem "compass-rails", "~> 2.0.alpha.0"
+gem "compass-rails", "~> 1.1.2"
 gem "susy"
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
