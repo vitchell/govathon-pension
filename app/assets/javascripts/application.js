@@ -76,8 +76,10 @@ function updateTable(){
   var vacation= parseInt( $("#vacation").val() );
   var current_year = new Date().getFullYear();
 
-  // Add on one pay period worth of vacation accrual into monthly salary
-  salary += ( ( (salary * 12) / 52 ) * vacation ) / 12;  
+  if( !isNaN(vacation) ){
+    // Add on one pay period worth of vacation accrual into monthly salary
+    salary += ( ( (salary * 12) / 52 ) * vacation ) / 12;  
+  }
 
   $("#gp-results-table-1 tbody, #gp-results-table-2 tbody").empty();
 
