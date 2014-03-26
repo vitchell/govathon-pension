@@ -48,7 +48,7 @@ function triggerSync(){
   var id = $(this).attr("id");
   if( id.match("sync") != null ){
     var target_id = id.replace("-sync", "");
-    if( target_id == "years" || target_id == "age" || target_id == "salary" || target_id == "vacation"  ){
+    if( target_id == "years" || target_id == "age" || target_id == "salary" || target_id == "vacation" || target_id == "sick"  ){
       $("#"+target_id).val( $(this).val() );
     }else{
       var checked = $(this).is(":checked");
@@ -57,7 +57,7 @@ function triggerSync(){
 
   }else{
     var target_id = id + "-sync";
-    if( id == "years" || id == "age" || id == "salary" || id == "vacation" ){
+    if( id == "years" || id == "age" || id == "salary" || id == "vacation" || id == "sick" ){
       $("#"+target_id).val( $(this).val() );
     }else{
       var checked = $(this).is(":checked");
@@ -73,12 +73,22 @@ function updateTable(){
   var years   = parseInt( $("#years").val() );
   var age     = parseInt( $("#age").val() );
   var salary  = parseInt( $("#salary").val().replace("$", "").replace(",", "") );
+  var sick    = parseInt( $("#sick").val() );
   var vacation= parseInt( $("#vacation").val() );
   var current_year = new Date().getFullYear();
 
   if( !isNaN(vacation) ){
-    // Add on one pay period worth of vacation accrual into monthly salary
-    salary += ( ( (salary * 12) / 52 ) * vacation ) / 12;  
+    var yearly_average_salary = salary * 12;
+    var weekly_average_salary = yearly_average_salary / 52.0;
+
+    // spread out outstanding vacation time across monthly salary
+    salary += Math.round((weekly_average_salary * vacation) / 36);  
+  }
+
+  if( isNaN(sick) ){
+    sick = 0;
+  }else{
+    sick = sick / 52.0;
   }
 
   $("#gp-results-table-1 tbody, #gp-results-table-2 tbody").empty();
@@ -88,36 +98,40 @@ function updateTable(){
 
   for( var i = -7; i <= 7; i++ ){
     $("#gp-results-table-1 tbody").append(
-      "<tr><td>"+ (current_year + i) +"&nbsp;</td><td>$"+calculatePension(years + i, age + i, salary)+" <span>/mo</span></td></tr>"
+      "<tr><td>"+ (current_year + i) +"&nbsp;</td><td>$"+calculatePension(years + i, age + i, salary, sick)+" <span>/mo</span></td></tr>"
     );
   }
   for( var i = 8; i <= 22; i++ ){
     $("#gp-results-table-2 tbody").append(
-      "<tr><td>"+ (current_year + i) +"&nbsp;</td><td>$"+calculatePension(years + i, age + i, salary)+" <span>/mo</span></td></tr>"
+      "<tr><td>"+ (current_year + i) +"&nbsp;</td><td>$"+calculatePension(years + i, age + i, salary, sick)+" <span>/mo</span></td></tr>"
     );
   }
 
 }
 
 
-function calculatePension(years, age, salary){
+function calculatePension(years, age, salary, sick){
   var value = 0;
   var flag_fire   = $("#fire").is(":checked");
   var flag_1978   = true;
   var flag_2005   = $("#a2005").is(":checked");
   var flag_2011   = $("#a2011").is(":checked");
+  if( flag_2011 ) flag_2005 = false;
+
   var max_age     = ( flag_fire ? 55 : 60 );
+  if( flag_2011 ) max_age = 62;
   var multiplier  = ( flag_fire ? 0.03 : ( flag_2005 ? 0.025 : 0.02 ) );
   if( flag_2011 ) multiplier = 0.01;
 
+
   var type = "none";
-  if( years >= 5  && age >= 60 ) type = "vested";
+  if( years >= 5  && age >= max_age ) type = "vested";
   if( years >= 10 ) type = "early";
-  if( flag_1978 && years >= 25 && ( (flag_fire && age >= 50) || ( !flag_fire && age >= 55) ) ) type = "reduced";
+  if( flag_1978 && years >= 25 && ( (flag_fire && age >= (50 - sick)) || ( !flag_fire && age >= (55 - sick)) ) ) type = "reduced";
   if(  (flag_2005 && years >= 30) 
-    || (flag_2005 && flag_fire && age >= 55 && years >= 10 ) 
-    || (flag_1978 && age >= 60 && years >= 10) 
-    || (flag_2011 && age >= 62 && years >= 15) ){ 
+    || (flag_2005 && flag_fire && age >= (55 - sick) && years >= 10 ) 
+    || (flag_1978 && age >= (60 - sick) && years >= 10) 
+    || (flag_2011 && age >= (62 - sick) && years >= 15) ){ 
 
     type = "normal";
   }
@@ -125,7 +139,7 @@ function calculatePension(years, age, salary){
   if( type == "normal" ){
 
     value = multiplier * years * salary;
-    if( flag_2005 && (value > (salary * 0.8)) ) value = salary * 0.8;
+    if( (flag_2005 || flag_2011) && (value > (salary * 0.8)) ) value = salary * 0.8;
 
   }else if( type == "early" ){
 
